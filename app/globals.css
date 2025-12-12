@@ -22,5 +22,10 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 400 !important;
+}
+
+.font-cedarville {
+  font-family: var(--font-cedarville);
 }
