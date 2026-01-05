@@ -126,7 +126,7 @@ export default function Home() {
               Shiva Kumar
             </p>
 
-            <div className={`text-base lg:text-0.5xl font-extralight p-0 mt-5`}>
+            <div className={`text-base lg:text-0.5xl font-extralight p-0 mt-5 text-justify`}>
               <p>
                 I’m a Full-Stack Developer with over 2<sup>+</sup> years of
                 hands-on experience in building scalable, user-focused web
