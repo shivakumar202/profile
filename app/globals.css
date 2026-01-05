@@ -29,3 +29,9 @@ body {
 .font-cedarville {
   font-family: var(--font-cedarville);
 }
+
+html { scroll-behavior: smooth; }
+
+/* hide scrollbars on mobile horizontal lists */
+.flex.overflow-x-auto::-webkit-scrollbar { display: none; }
+.flex.overflow-x-auto { -ms-overflow-style: none; scrollbar-width: none; }

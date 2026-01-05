@@ -76,7 +76,7 @@ const ConnectForm = () => {
                       </li>
                       <li>
                         <a
-                          href=""
+                          href="https://github.com/shivakumar202"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-white hover:underline"
@@ -86,7 +86,7 @@ const ConnectForm = () => {
                       </li>
                       <li>
                         <a
-                          href=""
+                          href="https://www.instagram.com/_7ncognito?igsh=NHVqdWlzcGxua3Vh"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-pink-600"

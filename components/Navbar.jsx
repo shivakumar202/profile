@@ -1,53 +1,65 @@
 'use client'
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 const Navbar = () => {
-  const pathname = usePathname();
+  const pathname = usePathname()
+  const [hash, setHash] = useState(typeof window !== 'undefined' ? window.location.hash : '')
+
+  useEffect(() => {
+    const onHash = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
+
+  const scrollTo = (e, id) => {
+    e.preventDefault()
+    const el = document.getElementById(id)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      history.replaceState(null, '', `#${id}`)
+      setHash(`#${id}`)
+    }
+  }
 
   return (
     <nav>
       <div className="bg-red-700 backdrop-blur-sm h-16 flex items-center justify-between px-6">
-        {/* Logo */}
         <h1 className="text-white font-bold text-xl">MyProfile</h1>
 
-        {/* Nav Links */}
         <ul className="flex space-x-6">
           <li>
-            <Link
-              href="/"
-              className={`${
-                pathname === "/" ? "bg-white text-red-700 px-3 py-1 rounded" : "text-white hover:text-gray-200"
-              } transition`}
+            <a
+              href="#home"
+              onClick={(e) => scrollTo(e, 'home')}
+              className={`${(pathname === '/' && (hash === '' || hash === '#home')) ? 'bg-white text-red-700 px-3 py-1 rounded' : 'text-white hover:text-gray-200'} transition`}
             >
               Home
-            </Link>
+            </a>
           </li>
           <li>
-            <Link
-              href="/projects"
-              className={`${
-                pathname === "/projects" ? "bg-white text-red-700 px-3 py-1 rounded" : "text-white hover:text-gray-200"
-              } transition`}
+            <a
+              href="#projects"
+              onClick={(e) => scrollTo(e, 'projects')}
+              className={`${hash === '#projects' ? 'bg-white text-red-700 px-3 py-1 rounded' : 'text-white hover:text-gray-200'} transition`}
             >
               Projects
-            </Link>
+            </a>
           </li>
           <li>
-            <Link
-              href="/contact"
-              className={`${
-                pathname === "/contact" ? "bg-white text-red-700 px-3 py-1 rounded" : "text-white hover:text-gray-200"
-              } transition`}
+            <a
+              href="#contact"
+              onClick={(e) => scrollTo(e, 'contact')}
+              className={`${hash === '#contact' ? 'bg-white text-red-700 px-3 py-1 rounded' : 'text-white hover:text-gray-200'} transition`}
             >
               Contact
-            </Link>
+            </a>
           </li>
         </ul>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

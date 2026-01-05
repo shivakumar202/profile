@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ConnectForm from "@/components/ConnectForm";
 import { Cedarville_Cursive } from "next/font/google";
 import { Github, Instagram, Linkedin } from "lucide-react";
-
+import Projects from "@/components/Projects";
 gsap.registerPlugin(ScrollTrigger);
 
 const cedarville = Cedarville_Cursive({
@@ -109,24 +109,24 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="@container bg-black min-h-screen text-white">
+    <main className="@container bg-gradient-to-t from-indigo-950 via-black to-indigo-950 min-h-screen text-white">
       {/* Profile Section */}
-      <section ref={profileRef} className="row">
-        <div className="flex space-x-1 justify-around p-10">
-          <div className="w-1/3 p-4 bg-white rounded-4xl shadow-lg">
+      <section ref={profileRef} className="row" id="home">
+        <div className="flex flex-col lg:flex-row lg:space-x-1 justify-around p-6 lg:p-10">
+          <div className="w-full lg:w-1/3 p-4 bg-white rounded-4xl shadow-lg mb-6 lg:mb-0">
             <img
-              src="https://media.licdn.com/dms/image/v2/D4E03AQHVaEXV7jXPtA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1727117557381?e=1763596800&v=beta&t=Tnxeh9NRPBq0hp8mfdcMu6UoI0naNS-7Wb20mvQkJ5o"
+              src="https://avatars.githubusercontent.com/u/137149601?v=4"
               className="img-fluid rounded-4xl h-100 w-full object-cover"
               alt="profile"
             />
           </div>
 
-          <div className={`w-2/3 items-start ps-10 pt-10`}>
-            <p className={`${cedarville.className} text-5xl p-0 font-bold`}>
+          <div className={`w-full lg:w-2/3 items-start ps-0 lg:ps-10 pt-2 lg:pt-10`}>
+            <p className={`${cedarville.className} text-4xl lg:text-5xl p-0 font-bold`}>
               Shiva Kumar
             </p>
 
-            <div className={`text-0.5xl font-extralight p-0 mt-5`}>
+            <div className={`text-base lg:text-0.5xl font-extralight p-0 mt-5`}>
               <p>
                 I’m a Full-Stack Developer with over 2<sup>+</sup> years of
                 hands-on experience in building scalable, user-focused web
@@ -161,7 +161,7 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    href=""
+                    href="https://github.com/shivakumar202"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-white hover:underline"
@@ -171,7 +171,7 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    href=""
+                    href="https://www.instagram.com/_7ncognito?igsh=NHVqdWlzcGxua3Vh"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-pink-600"
@@ -186,14 +186,16 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section ref={skillsRef} className="mt-1 @container px-4 py-4">
+      <section ref={skillsRef} className="mt-1 @container px-4 py-4" id="skills">
         <div className="text-center mb-5 pe-3">
-          <h1 className={`${cedarville.className} text-5xl font-bold`}>
+          <h1 className={`${cedarville.className} text-4xl lg:text-5xl font-bold`}>
             Tech Stacks
           </h1>
           <p>some small achievements</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+        {/* Desktop / Tablet: grid */}
+        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {skills.map((skill, index) => (
             <div
               key={index}
@@ -211,17 +213,44 @@ export default function Home() {
             </div>
           ))}
         </div>
+
+        {/* Mobile: horizontal snap carousel */}
+        <div className="block sm:hidden mt-2">
+          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-2 py-2">
+            {skills.map((skill, idx) => (
+              <div
+                key={idx}
+                className="snap-start flex-shrink-0 w-72 sm:w-auto bg-white rounded-xl shadow-lg p-5"
+                style={{ scrollSnapAlign: 'start' }}
+              >
+                <div className="flex flex-col items-center">
+                  <img
+                    src={skill.logo}
+                    alt={skill.name}
+                    className="w-16 h-16 mb-4 object-contain"
+                  />
+                  <h3 className="text-xl font-semibold mb-2 text-black text-center">
+                    {skill.name}
+                  </h3>
+                  <p className="text-gray-600 text-center text-sm">{skill.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Experience Section */}
-      <section ref={experienceRef} className="mt-1 py-4 px-4">
+      <section ref={experienceRef} className="mt-1 py-4 px-4" id="projects">
         <div className="text-center mb-5">
-          <h1 className={`${cedarville.className} text-5xl font-bold`}>
+          <h1 className={`${cedarville.className} text-4xl lg:text-5xl font-bold`}>
             Work Experience
           </h1>
           <p>some small achievements</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+        {/* Desktop / Tablet grid */}
+        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {experience.map((exp, index) => (
             <div
               key={index}
@@ -242,9 +271,38 @@ export default function Home() {
             </div>
           ))}
         </div>
+
+        {/* Mobile: horizontal snap carousel */}
+        <div className="block sm:hidden mt-2">
+          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-2 py-2">
+            {experience.map((exp, idx) => (
+              <div
+                key={idx}
+                className="snap-start flex-shrink-0 w-80 bg-white rounded-xl shadow-lg p-5"
+                style={{ scrollSnapAlign: 'start' }}
+              >
+                <div className="flex flex-col items-center">
+                  <img
+                    src={exp.image}
+                    alt={exp.title}
+                    className="w-20 h-20 mb-4 object-contain"
+                  />
+                  <h3 className="text-lg font-semibold mb-2 text-black text-center">
+                    {exp.title}
+                  </h3>
+                  <p className="text-red-500 mb-2">{exp.period}</p>
+                  <p className="text-gray-600 text-sm text-justify">
+                    {exp.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <ConnectForm />
+      <Projects />
+      <ConnectForm id="contact" />
     </main>
   );
 }
