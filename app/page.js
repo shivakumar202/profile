@@ -65,7 +65,7 @@ const skills = [
 const experience = [
   {
     title: "Full Stack Developer at Andaman Bliss",
-    period: "Jan 2025 - Present",
+    period: "Dec 2024 - Dec 2025",
     image: "/images/companies/andaman_bliss.png",
     description:
       "Developed and maintained web applications using Laravel and React. Collaborated with cross-functional teams to deliver high-quality software solutions.",
