@@ -5,19 +5,47 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 
 const ConnectForm = () => {
-  const [formData, setFormData] = useState({ username: '', email: '', phone: '' })
+  const [formData, setFormData] = useState({ username: '', email: '', phone: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   const handleChange = (e) => {
     const { id, value } = e.target
     setFormData((prev) => ({ ...prev, [id]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 3000)
-    setFormData({ username: '', email: '', phone: '' })
+    setLoading(true)
+    setError(null)
+
+    try {
+      // Send email using fetch to a backend API or email service
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          recipientEmail: 'shivakumar28226@gmail.com',
+        }),
+      })
+
+      if (response.ok) {
+        setSubmitted(true)
+        setFormData({ username: '', email: '', phone: '', message: '' })
+        setTimeout(() => setSubmitted(false), 3000)
+      } else {
+        throw new Error('Failed to send email')
+      }
+    } catch (err) {
+      setError('Failed to send message. Please try again.')
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const containerVariants = {
@@ -107,15 +135,36 @@ const ConnectForm = () => {
                 />
               </motion.div>
 
+              <motion.div variants={itemVariants}>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Tell me about your project..."
+                  rows="4"
+                  className="w-full bg-slate-800/50 border border-blue-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all resize-none"
+                />
+              </motion.div>
+
+              {error && (
+                <motion.p variants={itemVariants} className="text-red-400 text-sm">
+                  {error}
+                </motion.p>
+              )}
+
               <motion.button
                 variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full btn-gradient rounded-lg py-3 font-semibold flex items-center justify-center gap-2 mt-8"
+                disabled={loading}
+                className="w-full btn-gradient rounded-lg py-3 font-semibold flex items-center justify-center gap-2 mt-8 disabled:opacity-50"
               >
                 <MailPlus size={18} />
-                {submitted ? 'Message Sent! ✓' : 'Send Message'}
+                {loading ? 'Sending...' : submitted ? 'Message Sent! ✓' : 'Send Message'}
               </motion.button>
             </form>
           </motion.div>
@@ -144,7 +193,7 @@ const ConnectForm = () => {
                 {/* Quick Contact Methods */}
                 <div className="space-y-3">
                   <motion.a
-                    href="mailto:shivakumar@example.com"
+                    href="mailto:shivakumar28226@gmail.com"
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-3 text-gray-300 hover:text-blue-400 transition-colors group"
                   >
@@ -153,7 +202,7 @@ const ConnectForm = () => {
                     </div>
                     <div>
                       <p className="text-xs text-gray-500">Email</p>
-                      <p className="font-medium">shivakumar@example.com</p>
+                      <p className="font-medium">shivakumar28226@gmail.com</p>
                     </div>
                   </motion.a>
 
