@@ -1,105 +1,223 @@
-import {  Github, Instagram, Linkedin, MailSearchIcon } from "lucide-react"
+'use client'
+
+import { Github, Instagram, Linkedin, MailPlus, MessageCircle, Phone } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 const ConnectForm = () => {
+  const [formData, setFormData] = useState({ username: '', email: '', phone: '' })
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleChange = (e) => {
+    const { id, value } = e.target
+    setFormData((prev) => ({ ...prev, [id]: value }))
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setSubmitted(true)
+    setTimeout(() => setSubmitted(false), 3000)
+    setFormData({ username: '', email: '', phone: '' })
+  }
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: 'easeOut' },
+    },
+  }
+
   return (
-   <section className="mt-1 py-8 px-4 bg-gradient-to-t from-gray-900 to-black rounded-xl shadow-lg">
-  <h2 className="text-3xl font-bold mb-6 flex gap-2 items-center justify-center text-white">
-    Connect With Me <MailSearchIcon className="w-6 h-6" />
-  </h2>
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      className="w-full"
+    >
+      <div className="glass rounded-2xl border border-blue-500/20 overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0">
+          {/* Left: Contact Form */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="p-8 sm:p-10"
+          >
+            <motion.div
+              variants={itemVariants}
+              className="mb-8"
+            >
+              <h3 className="text-2xl sm:text-3xl font-bold mb-2">Send Message</h3>
+              <p className="text-gray-400">I'll get back to you within 24 hours</p>
+            </motion.div>
 
-  <div className="flex flex-wrap justify-center gap-10">
-    <form className="space-y-4 w-full sm:w-1/2 md:w-1/3 bg-gray-800 p-6 rounded-xl shadow-md">
-      <div>
-        <label htmlFor="username" className="block text-sm font-medium text-white">
-          Name
-        </label>
-        <input
-          type="text"
-          id="username"
-          className="mt-1 block w-full border border-gray-600 bg-gray-900 text-white rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Enter your name"
-        />
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <motion.div variants={itemVariants}>
+                <label htmlFor="username" className="block text-sm font-medium text-gray-300 mb-2">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  placeholder="Enter your name"
+                  className="w-full bg-slate-800/50 border border-blue-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                  required
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="your@email.com"
+                  className="w-full bg-slate-800/50 border border-blue-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                  required
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+1 (555) 000-0000"
+                  className="w-full bg-slate-800/50 border border-blue-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                />
+              </motion.div>
+
+              <motion.button
+                variants={itemVariants}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                className="w-full btn-gradient rounded-lg py-3 font-semibold flex items-center justify-center gap-2 mt-8"
+              >
+                <MailPlus size={18} />
+                {submitted ? 'Message Sent! ✓' : 'Send Message'}
+              </motion.button>
+            </form>
+          </motion.div>
+
+          {/* Right: Contact Info & Social */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="p-8 sm:p-10 bg-gradient-to-br from-blue-900/20 to-purple-900/20 flex flex-col justify-between"
+          >
+            <div className="space-y-8">
+              <motion.div variants={itemVariants}>
+                <p className="text-xl sm:text-2xl font-bold mb-4">Let's Work Together</p>
+                <p className="text-base sm:text-lg text-gray-300 leading-relaxed italic">
+                  "Have a great idea in mind? Let's connect and bring it to life together — transforming your vision into something truly remarkable."
+                </p>
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="space-y-4">
+                <p className="text-sm text-gray-400">
+                  Whether it's a web app, creative project, or a digital dream — I'd love to hear it.
+                </p>
+
+                {/* Quick Contact Methods */}
+                <div className="space-y-3">
+                  <motion.a
+                    href="mailto:shivakumar@example.com"
+                    whileHover={{ x: 5 }}
+                    className="flex items-center gap-3 text-gray-300 hover:text-blue-400 transition-colors group"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/30">
+                      <MailPlus size={18} className="text-blue-400" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Email</p>
+                      <p className="font-medium">shivakumar@example.com</p>
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="tel:+919876543210"
+                    whileHover={{ x: 5 }}
+                    className="flex items-center gap-3 text-gray-300 hover:text-blue-400 transition-colors group"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center group-hover:bg-purple-500/30">
+                      <Phone size={18} className="text-purple-400" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Phone</p>
+                      <p className="font-medium">+91 9876543210</p>
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="https://wa.me/919876543210"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ x: 5 }}
+                    className="flex items-center gap-3 text-gray-300 hover:text-green-400 transition-colors group"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center group-hover:bg-green-500/30">
+                      <MessageCircle size={18} className="text-green-400" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">WhatsApp</p>
+                      <p className="font-medium">Quick Chat</p>
+                    </div>
+                  </motion.a>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Social Links */}
+            <motion.div variants={itemVariants} className="space-y-4 mt-8">
+              <p className="text-sm font-semibold text-gray-300">Follow Me</p>
+              <div className="flex gap-3">
+                {[
+                  { Icon: Linkedin, href: 'https://www.linkedin.com/in/shivakumar-h-p-927b621b4/', label: 'LinkedIn' },
+                  { Icon: Github, href: 'https://github.com/shivakumar202', label: 'GitHub' },
+                  { Icon: Instagram, href: 'https://www.instagram.com/_7ncognito?igsh=NHVqdWlzcGxua3Vh', label: 'Instagram' },
+                ].map(({ Icon, href, label }, i) => (
+                  <motion.a
+                    key={i}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.15, rotate: 10 }}
+                    whileTap={{ scale: 0.9 }}
+                    title={label}
+                    className="w-10 h-10 rounded-lg glass border border-blue-500/30 flex items-center justify-center text-blue-400 hover:text-blue-300 hover:border-blue-400/50 transition-all"
+                  >
+                    <Icon size={18} />
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
       </div>
-
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium text-white">
-          Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          className="mt-1 block w-full border border-gray-600 bg-gray-900 text-white rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Enter your email"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="phone" className="block text-sm font-medium text-white">
-          Phone No.
-        </label>
-        <input
-          type="text"
-          id="phone"
-          className="mt-1 block w-full border border-gray-600 bg-gray-900 text-white rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Enter your phone number"
-        />
-      </div>
-
-      <button
-        type="submit"
-        className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
-      >
-        Send Message
-      </button>
-    </form>
-
-    <div className="w-full sm:w-1/2 md:w-1/3 flex flex-col justify-center p-6 text-white">
-      <p className="text-lg leading-relaxed italic text-gray-200">
-        “Have a great idea in mind? Let’s connect and bring it to life together —
-        transforming your vision into something truly remarkable.”
-      </p>
-      <p className="mt-3 text-sm text-gray-400">
-        Whether it’s a web app, creative project, or a digital dream — I’d love to hear it.
-      </p>
-       <div className="mt-5">
-                    <p className={` text-2xl`}>Connect </p>
-                    <ul className="flex space-x-4 mt-2">
-                      <li>
-                        <a
-                          href="https://www.linkedin.com/in/shivakumar-h-p-927b621b4/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-600 hover:underline"
-                        >
-                          <Linkedin />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="https://github.com/shivakumar202"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-white hover:underline"
-                        >
-                          <Github />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="https://www.instagram.com/_7ncognito?igsh=NHVqdWlzcGxua3Vh"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-pink-600"
-                        >
-                          <Instagram />
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-    </div>
-  </div>
-</section>
-
+    </motion.section>
   )
 }
 
