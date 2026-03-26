@@ -130,7 +130,7 @@ const ConnectForm = () => {
                   id="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder="+1 (555) 000-0000"
+                  placeholder="+91 9933XXXXXX"
                   className="w-full bg-slate-800/50 border border-blue-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
                 />
               </motion.div>
@@ -207,7 +207,7 @@ const ConnectForm = () => {
                   </motion.a>
 
                   <motion.a
-                    href="tel:+919876543210"
+                    href="tel:+7430809911"
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-3 text-gray-300 hover:text-blue-400 transition-colors group"
                   >
@@ -216,12 +216,12 @@ const ConnectForm = () => {
                     </div>
                     <div>
                       <p className="text-xs text-gray-500">Phone</p>
-                      <p className="font-medium">+91 9876543210</p>
+                      <p className="font-medium">+91 7430809911</p>
                     </div>
                   </motion.a>
 
                   <motion.a
-                    href="https://wa.me/919876543210"
+                    href="https://wa.me/7430809911"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ x: 5 }}

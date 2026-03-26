@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
 import { ArrowBigRight, ExternalLink } from "lucide-react";
-import { Cedarville_Cursive } from "next/font/google";
+import { Inter } from "next/font/google";
 import { motion } from "framer-motion";
 
-const cedarville = Cedarville_Cursive({
+const inter = Inter({
   subsets: ["latin"],
   weight: "400",
 });
@@ -15,37 +15,57 @@ const Projects = () => {
       title: "Think n Maker",
       img: "https://www.thinknmaker.com/theme_2/pix.png",
       description: "Creative platform for makers",
+      link: "https://www.thinknmaker.com/",
       category: "Tourism",
+      tech: ["php", "slim", "mysql"],
     },
     {
       title: "Seadeck",
       img: "https://seadeck.in/theme-1/upload/logo-nx1.png",
       description: "BnB Reservation platform",
+      link: "https://seadeck.in/",
       category: "Hotel & Tourism",
+      tech: ["php", "slim", "mysql"],
     },
     {
       title: "Andaman Akash",
       img: "https://andamanakash.com/themes-2/images/logo.png",
       description: "Tourism & travel booking",
+      link: "https://andamanakash.com/",
       category: "Tourism",
+      tech: ["php", "slim", "mysql"],
     },
     {
       title: "Andaman Bliss",
       img: "https://andamanbliss.com/site/img/logo.png",
       description: "travel agency management system",
+      link: "https://andamanbliss.com/",
       category: "Tourism",
+      tech: ["Laravel", "CRM", "API Integration"],
     },
     {
       title: "Island Wonders",
       img: "https://islandswonder.com/assets/img/home/900ba028c5d27653.png",
       description: "Island attractions platform",
+      link: "https://islandswonder.com/",
       category: "Tourism",
+      tech: ["Slim3", "PHP", "MySQL"],
     },
     {
       title: "MCM Building Solutions",
       img: null,
       description: "Enterprise inventory management",
+      link: "#",
       category: "Enterprise",
+      tech: ["laravel", "CRM"],
+    },
+    {
+      title: "Andaman Ticket Hub",
+      img: "https://andamantickethub.com/storage/company_logos/BGJ5CYf6Jkz4GXurR3qQRfFA0XjT3F8Edpo9EKu1.png",
+      link: "https://andamantickethub.com/",
+      description: "Ticketing system for attractions",
+      category: "Tourism",
+      tech: ["Next.js", "Laravel"],
     },
   ];
 
@@ -89,7 +109,7 @@ const Projects = () => {
                 <img
                   src={project.img}
                   alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
                 />
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
@@ -134,28 +154,27 @@ const Projects = () => {
               </h3>
 
               {/* Tech badges */}
+
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="text-xs px-2 py-1 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                  React
-                </span>
-                <span className="text-xs px-2 py-1 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                  Laravel
-                </span>
+                {project.tech.map((tech, i) => (
+                  <span
+                    key={i}
+                    className="text-xs px-2 py-1 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
 
-              <motion.a
-                href="#"
-                whileHover={{ x: 5 }}
-                className="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors group"
-              >
-                View Case Study
-                <motion.div
-                  whileHover={{ x: 3 }}
-                  className="w-4 h-4"
+              <div className="w-full">
+                <motion.a
+                  href={project.link}
+                  whileHover={{ x: 5 }}
+                  className=" bg-amber-50 py-1 px-4 rounded-md items-center w-full text-center gap-2 text-sm text-blue-900 hover:text-blue-300 transition-colors group"
                 >
-                  <ArrowBigRight size={16} />
-                </motion.div>
-              </motion.a>
+                  View
+                </motion.a>
+              </div>
             </div>
 
             {/* Corner gradient */}

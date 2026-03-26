@@ -1,18 +1,12 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
-import { Cedarville_Cursive } from "next/font/google";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
-
-const cedarville = Cedarville_Cursive({
-  subsets: ["latin"],
-  weight: "400",
 });
 
 const geistMono = Geist_Mono({
@@ -42,6 +36,10 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link
           href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Headland+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
           rel="stylesheet"
         />
         <meta name="theme-color" content="#0a0e27" />

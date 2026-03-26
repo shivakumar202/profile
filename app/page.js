@@ -3,21 +3,21 @@
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Cedarville_Cursive } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import { Github, Instagram, Linkedin, ArrowRight, Code2, Briefcase, Zap } from 'lucide-react'
-import ConnectForm from '@/components/ConnectForm'
-import Projects from '@/components/Projects'
-import SkillBars from '@/components/SkillBars'
+import ConnectForm from '../components/ConnectForm'
+import Projects from '../components/Projects'
+import SkillBars from '../components/SkillBars'
 
 // Lazy load 3D background for better performance
-const HeroBackground = dynamic(() => import('@/components/HeroBackground'), {
+const HeroBackground = dynamic(() => import('../components/HeroBackground'), {
   loading: () => <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 to-purple-900/40" />,
   ssr: false,
 })
 
-const cedarville = Cedarville_Cursive({
+const inter = Inter({
   subsets: ['latin'],
-  weight: '400',
+  weight: '900',
 })
 
 const skills = [
@@ -58,7 +58,7 @@ const skills = [
   },
   {
     name: 'Laravel',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain-wordmark.svg',
+    logo: 'https://laravel.com/img/logotype.min.svg',
     desc: 'A modern PHP framework focused on elegant syntax, MVC architecture, and developer productivity.',
   },
   {
@@ -105,6 +105,23 @@ const services = [
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
+  const [showLoader, setShowLoader] = useState(true)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const keys = ['L', 'O', 'A', 'D', 'I', 'N', 'G']
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % keys.length)
+    }, 200)
+    return () => clearInterval(interval)
+  }, [keys.length])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false)
+    }, 1400)
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
     setMounted(true)
@@ -125,6 +142,30 @@ export default function Home() {
       y: 0,
       transition: { duration: 0.8, ease: 'easeOut' },
     },
+  }
+
+  if (showLoader) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-slate-900">
+        <div className="flex gap-3" style={{ perspective: '800px' }}>
+          {keys.map((key, index) => (
+            <div
+              key={index}
+              className={`w-11 h-11 sm:w-15 sm:h-15 bg-gradient-to-br from-slate-700 to-slate-900 rounded-xl flex items-center justify-center font-bold text-sm sm:text-xl transition-all duration-150 ${
+                index === activeIndex ? 'translate-y-1.5 scale-96 text-green-500' : 'text-sky-400'
+              }`}
+              style={{
+                boxShadow: index === activeIndex
+                  ? '0 2px 0 #020617, 0 4px 10px rgba(0,0,0,0.5)'
+                  : '0 6px 0 #020617, 0 10px 20px rgba(0,0,0,0.6)',
+              }}
+            >
+              {key}
+            </div>
+          ))}
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -158,7 +199,7 @@ export default function Home() {
                 ✨ Full-Stack Developer
               </motion.span>
               <h1
-                className={`${cedarville.className} text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-4`}
+                className={`${inter.className} text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-4`}
               >
                 <motion.span className="gradient-text inline-block">
                   Shiva Kumar
@@ -285,7 +326,7 @@ export default function Home() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className={`${cedarville.className} text-4xl sm:text-5xl font-bold mb-4 gradient-text`}>
+          <h2 className={`${inter.className} text-4xl sm:text-5xl font-bold mb-4 gradient-text`}>
             Services
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
@@ -328,7 +369,7 @@ export default function Home() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className={`${cedarville.className} text-4xl sm:text-5xl font-bold mb-4 gradient-text`}>
+          <h2 className={`${inter.className} text-4xl sm:text-5xl font-bold mb-4 gradient-text`}>
             Technical Expertise
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
@@ -347,7 +388,7 @@ export default function Home() {
           viewport={{ once: true }}
           className="mt-20"
         >
-          <h3 className={`${cedarville.className} text-2xl font-bold mb-8 text-center gradient-text`}>
+          <h3 className={`${inter.className} text-2xl font-bold mb-8 text-center gradient-text`}>
             Tech Stack Highlights
           </h3>
 
@@ -380,7 +421,7 @@ export default function Home() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className={`${cedarville.className} text-4xl sm:text-5xl font-bold mb-4 gradient-text`}>
+          <h2 className={`${inter.className} text-4xl sm:text-5xl font-bold mb-4 gradient-text`}>
             Work Experience
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
@@ -440,7 +481,7 @@ export default function Home() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className={`${cedarville.className} text-4xl sm:text-5xl font-bold mb-4 gradient-text`}>
+          <h2 className={`${inter.className} text-4xl sm:text-5xl font-bold mb-4 gradient-text`}>
             Featured Projects
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
@@ -459,7 +500,7 @@ export default function Home() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className={`${cedarville.className} text-4xl sm:text-5xl font-bold mb-4 gradient-text`}>
+          <h2 className={`${inter.className} text-4xl sm:text-5xl font-bold mb-4 gradient-text`}>
             Let's Connect
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">

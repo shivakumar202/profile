@@ -1,11 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Cedarville_Cursive } from 'next/font/google'
+import { Inter } from 'next/font/google'
 
-const cedarville = Cedarville_Cursive({
+const inter = Inter({
   subsets: ['latin'],
-  weight: '400',
+  weight: '700',
 })
 
 const skillCategories = [
@@ -84,7 +84,7 @@ export default function SkillBars() {
     >
       {skillCategories.map((cat, idx) => (
         <motion.div key={idx} variants={itemVariants} className="space-y-6">
-          <h3 className={`${cedarville.className} text-2xl gradient-text font-bold`}>
+          <h3 className={`${inter.className} text-2xl gradient-text font-bold`}>
             {cat.category}
           </h3>
 
