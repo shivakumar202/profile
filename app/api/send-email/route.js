@@ -12,13 +12,32 @@ export async function POST(request) {
       )
     }
 
+    // Validate email credentials first
+    const emailUser = process.env.EMAIL_USER
+    const emailPassword = process.env.EMAIL_PASSWORD
+
+    if (!emailUser || !emailPassword) {
+      console.error('Missing email credentials', {
+        hasUser: Boolean(emailUser),
+        hasPassword: Boolean(emailPassword),
+      })
+
+      return Response.json(
+        {
+          error: 'Missing email credentials',
+          details: 'EMAIL_USER and EMAIL_PASSWORD must be set in environment variables',
+        },
+        { status: 500 }
+      )
+    }
+
     // Create transporter (configure with your email service)
     // For Gmail, you'll need to use an App Password
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
+        user: emailUser,
+        pass: emailPassword,
       },
     })
 
