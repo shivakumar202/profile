@@ -28,6 +28,7 @@ import StatsCounter from "@/components/StatsCounter";
 import TestimonialMarquee from "@/components/TestimonialMarquee";
 import MagneticButton from "@/components/MagneticButton";
 import CursorFollower from "@/components/CursorFollower";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 // Types
 interface Project {
@@ -977,7 +978,7 @@ export default function PremiumPortfolio() {
           </div>
         </div>
       </section>
-
+      <FloatingWhatsApp />
       <Footer />
     </div>
   );
