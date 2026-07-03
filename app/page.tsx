@@ -210,17 +210,17 @@ export default function PremiumPortfolio() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % keys.length)
-    }, 200)
-    return () => clearInterval(interval)
-  }, [keys.length])
+      setActiveIndex((prev) => (prev + 1) % keys.length);
+    }, 200);
+    return () => clearInterval(interval);
+  }, [keys.length]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowLoader(false)
-    }, 1400)
-    return () => clearTimeout(timer)
-  }, [])
+      setShowLoader(false);
+    }, 1400);
+    return () => clearTimeout(timer);
+  }, []);
   // Scroll Progress
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -541,6 +541,125 @@ export default function PremiumPortfolio() {
                 </motion.div>
               );
             })}
+          </div>
+
+          <div className="mt-12 ">
+            {/* Header */}
+           
+            <div className="flex justify-between items-end mb-12">
+            <div>
+              <div className="uppercase tracking-[3px] text-xs text-black/40 mb-2">
+                 INTEGRATION EXPERTISE
+              </div>
+              <h2 className="section-title">API Integrations</h2>
+            </div>
+            <p className="hidden md:block max-w-[320px] text-sm text-black/50">
+             I connect your platform with the tools and services that matter
+                most.
+            </p>
+          </div>
+            
+
+            {/* Integrations Grid */}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {/* Razorpay */}
+              <div className="group rounded-2xl border border-black/10 p-5 hover:border-black/20 transition-all hover:shadow-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white text-sm font-bold">
+                    R
+                  </div>
+                  <div>
+                    <div className="font-semibold">Razorpay</div>
+                    <div className="text-xs text-black/50">Payment Gateway</div>
+                  </div>
+                </div>
+                <p className="text-sm text-black/70">
+                  Secure payments, UPI, cards & net banking integration
+                </p>
+              </div>
+
+              {/* Bandhan Bank */}
+              <div className="group rounded-2xl border border-black/10 p-5 hover:border-black/20 transition-all hover:shadow-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-9 h-9 rounded-xl bg-[#003087] flex items-center justify-center text-white text-xs font-bold">
+                    BB
+                  </div>
+                  <div>
+                    <div className="font-semibold">Bandhan Bank</div>
+                    <div className="text-xs text-black/50">
+                      Banking Integration
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm text-black/70">
+                  Direct bank transfers and financial API integration
+                </p>
+              </div>
+
+              {/* Travelbotique */}
+              <div className="group rounded-2xl border border-black/10 p-5 hover:border-black/20 transition-all hover:shadow-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white text-xs font-bold">
+                    T
+                  </div>
+                  <div>
+                    <div className="font-semibold">Travelbotique</div>
+                    <div className="text-xs text-black/50">Hotel API</div>
+                  </div>
+                </div>
+                <p className="text-sm text-black/70">
+                  Real-time hotel inventory and booking synchronization
+                </p>
+              </div>
+
+              {/* Makruzz */}
+              <div className="group rounded-2xl border border-black/10 p-5 hover:border-black/20 transition-all hover:shadow-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-9 h-9 rounded-xl bg-orange-600 flex items-center justify-center text-white text-xs font-bold">
+                    M
+                  </div>
+                  <div>
+                    <div className="font-semibold">Makruzz</div>
+                    <div className="text-xs text-black/50">Ferry Booking</div>
+                  </div>
+                </div>
+                <p className="text-sm text-black/70">
+                  Andaman ferry ticket integration & availability
+                </p>
+              </div>
+
+              {/* Nautika */}
+              <div className="group rounded-2xl border border-black/10 p-5 hover:border-black/20 transition-all hover:shadow-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-9 h-9 rounded-xl bg-cyan-600 flex items-center justify-center text-white text-xs font-bold">
+                    N
+                  </div>
+                  <div>
+                    <div className="font-semibold">Nautika</div>
+                    <div className="text-xs text-black/50">Ferry API</div>
+                  </div>
+                </div>
+                <p className="text-sm text-black/70">
+                  Live ferry schedules and seat booking system
+                </p>
+              </div>
+
+              {/* Green Ocean */}
+              <div className="group rounded-2xl border border-black/10 p-5 hover:border-black/20 transition-all hover:shadow-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-9 h-9 rounded-xl bg-teal-600 flex items-center justify-center text-white text-xs font-bold">
+                    GO
+                  </div>
+                  <div>
+                    <div className="font-semibold">Green Ocean</div>
+                    <div className="text-xs text-black/50">Ferry Services</div>
+                  </div>
+                </div>
+                <p className="text-sm text-black/70">
+                  Seamless ferry booking and management integration
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -65,7 +65,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           <img 
             src={project.image} 
             alt={project.title}
-            className="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-[1.08]"
+            className="absolute inset-0 w-full h-full object-contain bg-slate-300 transition-all duration-700 group-hover:scale-[1.08]"
             loading="lazy"
           />
           {/* Subtle gradient overlay */}
