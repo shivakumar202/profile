@@ -3,22 +3,27 @@
 import React from 'react';
 
 export default function FloatingWhatsApp() {
-  const phoneNumber = "917430809911"; // Your number with country code (India = 91)
+  const phoneNumber = "917430809911";
   const message = "Hi Shiv, I'm interested in getting a website made.";
 
   const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
-    <a
-      href={whatsappLink}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 group"
-      aria-label="Chat on WhatsApp"
-    >
-      <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-all hover:scale-110 active:scale-95">
-        
-        {/* WhatsApp Icon */}
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-1.5">
+      
+      {/* "I'm here" Message */}
+      <div className="rounded-full bg-white px-4 py-1.5 text-sm font-medium text-black shadow-md border border-black/10">
+        I'm here
+      </div>
+
+      {/* WhatsApp Button */}
+      <a
+        href={whatsappLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-all hover:scale-110 active:scale-95"
+        aria-label="Chat on WhatsApp"
+      >
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           className="h-8 w-8 text-white" 
@@ -29,9 +34,9 @@ export default function FloatingWhatsApp() {
           <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.08L2 22l4.92-1.38A9.96 9.96 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.4 0-2.72-.36-3.88-1L4 20l1.04-3.92A7.96 7.96 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/>
         </svg>
 
-        {/* Optional pulse animation */}
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#25D366] opacity-30 group-hover:opacity-0"></span>
-      </div>
-    </a>
+        {/* Subtle pulse effect */}
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#25D366] opacity-25 group-hover:opacity-0"></span>
+      </a>
+    </div>
   );
 }
