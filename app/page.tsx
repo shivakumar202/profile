@@ -125,7 +125,9 @@ const projects: Project[] = projectsData.map((project, index) => ({
     project.img && project.img !== "#"
       ? project.img
       : "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1200&q=80",
-  tags: project.tech.map((tech) => tech.replace(/\b\w/g, (char) => char.toUpperCase())),
+  tags: project.tech.map((tech) =>
+    tech.replace(/\b\w/g, (char) => char.toUpperCase()),
+  ),
   liveUrl: project.link && project.link !== "#" ? project.link : "#",
   category: project.category,
 }));
@@ -202,7 +204,23 @@ export default function PremiumPortfolio() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const keys = ["L", "O", "A", "D", "I", "N", "G"];
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % keys.length)
+    }, 200)
+    return () => clearInterval(interval)
+  }, [keys.length])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false)
+    }, 1400)
+    return () => clearTimeout(timer)
+  }, [])
   // Scroll Progress
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -294,13 +312,42 @@ export default function PremiumPortfolio() {
       });
     } catch (error) {
       console.error(error);
-      toast.error("Sorry, your message could not be sent right now. Please try again later.");
+      toast.error(
+        "Sorry, your message could not be sent right now. Please try again later.",
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   // Magnetic buttons already handle their own, but we can use for primary CTAs
+
+  if (showLoader) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-white">
+        <div className="flex gap-3" style={{ perspective: "800px" }}>
+          {keys.map((key, index) => (
+            <div
+              key={index}
+              className={`w-11 h-11 sm:w-15 sm:h-15 bg-white rounded-sm flex items-center justify-center font-bold text-sm sm:text-xl transition-all duration-150 ${
+                index === activeIndex
+                  ? "translate-y-1.5 scale-96 text-gray-500 border-1 border-black"
+                  : "text-slate-700"
+              }`}
+              style={{
+                boxShadow:
+                  index === activeIndex
+                    ? "0 1px 0 #020617, 0 4px 10px rgba(0,0,0,0.5)"
+                    : "0 6px 0 #020617, 0 10px 20px rgba(0,0,0,0.6)",
+              }}
+            >
+              {key}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white text-black selection:bg-black selection:text-white overflow-x-hidden">
@@ -508,7 +555,8 @@ export default function PremiumPortfolio() {
             <h2 className="section-title">Tools I Use</h2>
           </div>
           <p className="max-w-[34ch] text-sm text-black/55">
-            A modern stack for building fast, scalable, and polished digital products.
+            A modern stack for building fast, scalable, and polished digital
+            products.
           </p>
         </div>
 
