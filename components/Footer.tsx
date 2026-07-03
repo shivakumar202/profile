@@ -44,10 +44,10 @@ export default function Footer() {
             <div className="col-span-2 md:col-span-1">
               <div className="font-medium mb-4 text-black/60">Get in Touch</div>
               <a 
-                href="mailto:hello@shivwebs.online" 
+                href="mailto:shivakumar28226@gmail.com" 
                 className="text-black/70 hover:text-black transition-colors block mb-1"
               >
-                hello@shivwebs.online
+                shivakumar28226@gmail.com
               </a>
               <a 
                 href="https://wa.me/917430809911" 
@@ -73,7 +73,7 @@ export default function Footer() {
             <a href="https://github.com/shivakumar202" target="_blank" rel="noopener" className="hover:text-black transition-colors"><Github size={16} /></a>
             <a href="https://www.linkedin.com/in/shiva-kumar-7n/" target="_blank" rel="noopener" className="hover:text-black transition-colors"><Linkedin size={16} /></a>
             <a href="https://www.instagram.com/_7ncognito?igsh=NHVqdWlzcGxua3Vh" target="_blank" rel="noopener" className="hover:text-black transition-colors"><Instagram size={16} /></a>
-            <a href="mailto:hello@shivwebs.online" className="hover:text-black transition-colors"><Mail size={16} /></a>
+            <a href="mailto:shivakumar28226@gmail.com" className="hover:text-black transition-colors"><Mail size={16} /></a>
           </div>
         </div>
       </div>
