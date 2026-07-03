@@ -60,6 +60,14 @@ const projectsData = [
     tech: ["php", "slim", "mysql"],
   },
   {
+    title: "Andaman Star Gazing",
+    img: "https://www.creativefabrica.com/product/silhouette-telescope-astronomy-logo/",
+    description: "Stargazing and astronomy platform",
+    link: "https://stargazing-smoky.vercel.app/",
+    category: "Activities",
+    tech: ["next.js", "react", "tailwind"],
+  },
+  {
     title: "Web Roast",
     img: "#",
     description: "Website review platform for businesses",
