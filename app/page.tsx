@@ -61,7 +61,7 @@ const projectsData = [
   },
   {
     title: "Andaman Star Gazing",
-    img: "https://www.creativefabrica.com/product/silhouette-telescope-astronomy-logo/",
+    img: "https://cdn.creativefabrica.com/2022/01/06/silhouette-telescope-astronomy-logo-Graphics-23054823-1.jpg",
     description: "Stargazing and astronomy platform",
     link: "https://stargazing-smoky.vercel.app/",
     category: "Activities",
